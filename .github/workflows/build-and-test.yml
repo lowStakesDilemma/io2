@@ -1,0 +1,22 @@
+name: Build And Test
+
+on: push
+
+jobs:
+    build:
+        runs-on: windows-latest
+        env:
+            Solution_Name: GitRepoTest.sln
+            Test_Project_Path: UnitTestsGit\UnitTestsGit.csproj
+        steps:
+        - uses: actions/checkout@v4
+        - name: Setup dotnet
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: '8.0.x'
+        - name: Install Dependecies
+          run: dotnet restore
+        - name: Build
+          run: dotnet build
+        - name: Test
+          run: dotnet test
